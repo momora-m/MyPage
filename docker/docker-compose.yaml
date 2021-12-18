@@ -1,0 +1,50 @@
+version: '3.1'
+
+volumes: 
+  mongodata:
+  postgresdata:
+networks:
+  mypage:
+  master:
+
+services:
+  mongo:
+    container_name: MyPagedb
+    build: ./mongo
+    restart: always
+    networks:
+      - "mypage"
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    volumes:
+       - mongodata:/data/db
+  mongo-express:
+    container_name: mypage-express
+    image: mongo-express
+    restart: always
+    networks:
+      - "mypage" 
+    depends_on:
+      - "mongo"   
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: root
+      ME_CONFIG_MONGODB_URL: mongodb://root:root@mypagedb:27017/
+  postgresql:
+    container_name: masterdb
+    build: ./postgres
+    restart: always
+    networks:
+      - "master"
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: mypage
+      POSTGRES_PASSWORD: mypage  

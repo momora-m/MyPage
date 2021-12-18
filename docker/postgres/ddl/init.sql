@@ -1,0 +1,3 @@
+CREATE USER myapp
+CREATE DATABASE myappdb encoding UTF-8
+GRANT ALL PRIVLEGES ON DATABASE myappdb to myapp; 
