@@ -11,6 +11,7 @@ import { ThemeProvider } from '@emotion/react';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -60,13 +61,17 @@ function BasicCard() {
 
 
 const MainPageView: VFC = () => {
+  const history = useHistory();
+  const moveRecipe = () => {
+    history.push('/recipe');
+  }
   return (
     <div>   
       <Grid container direction="column" xs = {12} spacing={2}  mt = {1} alignItems="center" justifyItems="center"> 
         <Grid item xs={2} alignItems="center" justifyItems="center">
           <Item>
           <ThemeProvider theme={theme}>
-              <Button>
+              <Button onClick={moveRecipe} >
                 <Typography variant="h3">
                   在庫確認・登録
                 </Typography>

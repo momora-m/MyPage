@@ -109,7 +109,7 @@ const MainPageView: VFC = () => {
           <BasicCard />
         </Grid>
       </Grid>
-      <Grid item xs={6} ml = {30} alignItems="center" justifyItems="center">
+      <Grid item xs={6} spacing={5} ml = {30} mt={3} alignItems="center" justifyItems="center">
           <Item>
           <ThemeProvider theme={theme}>
             <Button onClick={moveRegister}>
