@@ -26,7 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function BasicCard() {
   return (
-    <Card sx={{ minWidth: 275,m: 30}}>
+    <Card sx={{ minWidth: 275}}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           プロモーション
@@ -67,7 +67,7 @@ const MainPageView: VFC = () => {
             <WineBarIcon />
             </Grid> 
           <Grid item xs={3}>
-            <Item>アルコール</Item>
+            <Item>アルコールだよ</Item>
           </Grid>
         </Grid>
         <Grid container direction="column" xs = {3} spacing={2} mt = {1} alignItems="center" justifyItems="center">
