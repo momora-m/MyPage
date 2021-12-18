@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useHistory } from 'react-router-dom';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Copyright(props: any) {
@@ -28,6 +29,7 @@ function Copyright(props: any) {
   );
 }
 
+
 const theme = createTheme();
 
 export type LoginPageApp = {
@@ -40,7 +42,7 @@ type Props = {
 }
 
 const LoginPageView: VFC<Props> = (props) => {
-
+  const history = useHistory();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -49,6 +51,7 @@ const LoginPageView: VFC<Props> = (props) => {
       email: data.get('email'),
       password: data.get('password'),
     });
+    history.push('/main');
   };
   const  { userInfo } = props;
   return (
