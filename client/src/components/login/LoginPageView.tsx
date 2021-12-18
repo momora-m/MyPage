@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useHistory } from 'react-router-dom';
+import { Paper } from '@mui/material';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Copyright(props: any) {
@@ -57,6 +58,7 @@ const LoginPageView: VFC<Props> = (props) => {
   const  { userInfo } = props;
   return (
     <ThemeProvider theme={theme}>
+      <Paper sx={{width:600,ml:35}}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -123,6 +125,7 @@ const LoginPageView: VFC<Props> = (props) => {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
+      </Paper>
     </ThemeProvider>
   );
 };
