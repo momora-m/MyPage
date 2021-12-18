@@ -11,8 +11,15 @@ import BakeryDiningIcon from '@mui/icons-material/BakeryDining';
 import SetMealIcon from '@mui/icons-material/SetMeal';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Stack from '@mui/material/Stack';
-import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, createTheme, ThemeProvider, Typography } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 
+
+
+
+
+
+const theme = createTheme();
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Item = styled(Paper)(({ theme }) => ({
@@ -51,6 +58,10 @@ function BasicCard() {
 }
 
 const MainPageView: VFC = () => {
+  const history = useHistory();
+  const moveRegister = () => {
+    history.push('/register');
+  }
   return (
     <div>   
       <Grid container direction="row" xs = {12} spacing={2} mt = {1} alignItems="center" justifyItems="center"> 
@@ -91,13 +102,22 @@ const MainPageView: VFC = () => {
         <Grid container direction="column" xs = {3} spacing={2} alignItems="center" justifyItems="center">
           <BasicCard />
         </Grid>
-        <Grid container direction="column" xs = {3} spacing={2} mt = {1} alignItems="center" justifyItems="center">
+        <Grid container direction="column" xs = {3} spacing={2} alignItems="center" justifyItems="center">
           <BasicCard />
         </Grid>
-        <Grid container direction="column" xs = {3} spacing={2} mt = {1} alignItems="center" justifyItems="center">
+        <Grid container direction="column" xs = {3} spacing={2} alignItems="center" justifyItems="center">
           <BasicCard />
         </Grid>
-      </Grid>          
+      </Grid>
+      <Grid item xs={6} ml = {30} alignItems="center" justifyItems="center">
+          <Item>
+          <ThemeProvider theme={theme}>
+            <Button onClick={moveRegister}>
+                  操作画面へ
+            </Button>
+          </ThemeProvider>
+        </Item>
+      </Grid>
     </div>
   );
 };
