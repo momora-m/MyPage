@@ -83,7 +83,7 @@ const MainPageView: VFC = () => {
             <SetMealIcon />
             </Grid> 
           <Grid item xs={3}>
-            <Item>魚類</Item>
+            <Item>魚類だ</Item>
           </Grid>
         </Grid>
       </Grid>
