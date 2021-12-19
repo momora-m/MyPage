@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { VFC } from 'react';                                                                                                   
+import { useEffect, useState, VFC } from 'react';
+import axios from 'axios'                                                                                                   
 import Grid from '@mui/material/Grid';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Box from '@mui/material/Box';
@@ -7,31 +8,9 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Button, Card, CardActions, CardContent, Checkbox, createTheme, FormControl, FormControlLabel, FormGroup, FormHelperText, Paper, styled, ThemeProvider, Typography } from '@mui/material';
-import Modal from '@mui/material/Modal';
 import { useHistory } from 'react-router-dom';
 
-const style = {
-  // eslint-disable-next-line @typescript-eslint/prefer-as-const
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
 
-
-function checkError(err: boolean){
-  if(err) {
-    return "不足材料を選んでください"
-  }
-  else{
-     return ""
-  }
-}
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -56,32 +35,29 @@ theme.typography.h3 = {
 
 const MainPageView: VFC = () => {
 
+  type Data =
+  {
+    _id:string;
+    user:string;
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    items:Array<object>;
+  }
+  const [datas, setDatas] = useState({keyValues: []});
+  const baseURL = 'https://fooddelivery-func.azurewebsites.net/api/GetRefrigerators?code=SnjCrkUDh9nuS0cXt4O7kipFG1yHrnFXlGT28KpHfzG9/gdwvS3Nyw==&user=userName'
+
+  useEffect(() => {
+    axios.get(baseURL).then((res) =>{
+       //useContext等に取得したデータを保存し利用する
+       // eslint-disable-next-line no-console
+       console.log(res.data)
+       setDatas({keyValues: res.data})
+    })
+  },[])
+  
   const history = useHistory();
   const moveMain = () => {
     history.push('/main');
   }
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const [state, setState] = React.useState({
-    beaf: false,
-    carrot: false,
-    potato: false,
-    onion: false,
-  });
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.checked,
-    });
-  };
-
-
-  const { beaf,carrot,potato,onion} = state;
-  const error = [beaf,carrot,potato,onion].filter((v) => v).length == 0;
 
   return (
     <div>
@@ -90,29 +66,20 @@ const MainPageView: VFC = () => {
           <Card sx={{ minWidth: 275}}>
             <CardContent>
               <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                不足材料選択
+                現在庫
               </Typography>
-              <FormControl
-                required
-                error={error}
-                component="fieldset"
-                sx={{ m: 3 }}
-              >
-                <FormGroup>
-                  <FormControlLabel control={<Checkbox checked={beaf} onChange={handleChange}/>} label="牛肉" name="beaf"/>
-                  <FormControlLabel control={<Checkbox checked={carrot} onChange={handleChange}/>} label="にんじん" name="carrot"/>
-                  <FormControlLabel control={<Checkbox checked={potato} onChange={handleChange}/>} label="じゃがいも" name="potato"/>
-                  <FormControlLabel control={<Checkbox checked={onion} onChange={handleChange}/>} label="たまねぎ" name="onion"/>
-                </FormGroup>
-                <FormHelperText>{checkError(error)}</FormHelperText>
-              </FormControl>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                {datas.keyValues && datas.keyValues.map((data: Data) => {
+                  <div>{data.items}</div>
+                })}
+              </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid container direction="row" xs={12} spacing={3}  mt = {1}  mr={3} >
             <Item>
               <ThemeProvider theme={theme}>
-                <Button onClick={moveMain}>
+                <Button>
                   <Typography variant="h3">
                     追加
                   </Typography>
@@ -121,27 +88,15 @@ const MainPageView: VFC = () => {
             </Item>
             <Item sx={{ml:10}}>
               <ThemeProvider theme={theme}>
-                <Button onClick={handleOpen}>
+                <Button onClick={moveMain}>
                   <Typography variant="h3">
-                    注文
+                    確定
                   </Typography>
                 </Button>
               </ThemeProvider>
             </Item>
         </Grid>
       </Grid>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            注文完了
-          </Typography>
-        </Box>
-      </Modal> 
     </div>
   );
 };
