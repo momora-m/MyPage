@@ -7,6 +7,7 @@ import MainPage from './components/main/MainPage';
 import RegisterPage from './components/register/RegisterPage';
 import RecipePage from './components/recipe/RecipePage';
 import OrderPage from './components/order/OrderPage';
+import StockPage from './components/stock/StockPage';
 import image from '../src/image/bkgi.png'
 
 
@@ -33,6 +34,7 @@ export const App: FC = () => (
           <Route exact path="/register" component={RegisterPage}></Route>
           <Route exact path="/recipe" component={RecipePage}></Route>
           <Route exact path="/order" component={OrderPage}></Route>
+          <Route exact path="/stock" component={StockPage}></Route>
         </React.Fragment>
       </Switch>
     </div>

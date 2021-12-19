@@ -68,13 +68,17 @@ const MainPageView: VFC = () => {
   const moveMain = () => {
     history.push('/main');
   }
+
+  const moveStock = () => {
+    history.push('/stock');
+  }
   return (
     <div>   
       <Grid container direction="column" xs = {12} spacing={2}  mt = {1} alignItems="center" justifyItems="center"> 
         <Grid item xs={2} alignItems="center" justifyItems="center">
           <Item>
           <ThemeProvider theme={theme}>
-              <Button >
+              <Button onClick={moveStock}>
                 <Typography variant="h3">
                   在庫確認・登録
                 </Typography>
