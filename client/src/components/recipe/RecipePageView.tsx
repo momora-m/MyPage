@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Stack from '@mui/material/Stack';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Button, Card, CardActions, CardContent, Checkbox, createTheme, FormControl, FormControlLabel, FormGroup, FormHelperText, Paper, styled, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, Checkbox, createTheme, FormControl, FormControlLabel, FormGroup, FormHelperText, Paper, styled, ThemeProvider, Typography } from '@mui/material';
 
 
 function checkError(err: boolean){
@@ -18,21 +18,48 @@ function checkError(err: boolean){
   }
 }
 
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
 function BasicCard() {
   return (
-    <Card sx={{ minWidth: 275}}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          料理名
-        </Typography>
-        <Typography variant="h5" component="div">
-          画像
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          なんか料理の説明文が変わります。
-        </Typography>
-
-      </CardContent>
+    <Card sx={{ width: 600, height:300}}>
+      <Grid container direction="row" xs = {12} spacing={2} ml = {2} alignItems="center" justifyItems="center">
+        <Grid container direction="column" xs = {6} spacing={2} mt = {2} alignItems="center" justifyItems="center">
+          <CardContent>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              料理名
+            </Typography>
+            <Typography variant="h5" component="div">
+              画像
+            </Typography>
+            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+              料理の説明文が変わります。
+            </Typography>
+          </CardContent>
+        </Grid>
+        <Grid container direction="column" xs = {6} spacing={2} mt = {2} alignItems="center" justifyItems="center">
+          <CardContent>
+              <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                カロリー
+              </Typography>
+              <Typography variant="h5" component="div">
+                800kcal
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                使用する材料
+              </Typography>
+              <FormControlLabel control={<Checkbox  />} label="じゃがいも" name="potato"/>
+              <FormControlLabel control={<Checkbox />} label="にんじん" name="carrot"/>
+              <FormControlLabel control={<Checkbox />} label="たまねぎ" name="onion"/>
+              <FormControlLabel control={<Checkbox />} label="牛肉" name="beaf"/>
+          </CardContent>
+        </Grid>
+      </Grid>
     </Card>
   );
 }
@@ -74,8 +101,8 @@ const MainPageView: VFC = () => {
 
   return (
     <div>
-      <Grid container direction="row" spacing={3}  mt = {1} alignItems="center" justifyItems="center">
-        <Grid container direction="column" xs = {3} spacing={5}  mt = {1} alignItems="center" justifyItems="center"> 
+      <Grid container direction="row" xs={12} spacing={3}  mt = {1} alignItems="center" justifyItems="center">
+        <Grid container direction="column" xs = {3} spacing={5}  mt = {0} mb={30} alignItems="center" justifyItems="center"> 
           <Card sx={{ minWidth: 275}}>
             <CardContent>
               <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -109,7 +136,18 @@ const MainPageView: VFC = () => {
             <BasicCard />
           </Box>
         </Grid>
-      </Grid> 
+        <Grid direction="column" item xs={3} ml={5} mt={60}>
+          <Item>
+            <ThemeProvider theme={theme}>
+              <Button >
+                <Typography variant="h3">
+                  確定
+                </Typography>
+              </Button>
+            </ThemeProvider>
+          </Item>
+        </Grid>
+      </Grid>
     </div>
   );
 };

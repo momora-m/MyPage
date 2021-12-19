@@ -65,13 +65,16 @@ const MainPageView: VFC = () => {
   const moveRecipe = () => {
     history.push('/recipe');
   }
+  const moveMain = () => {
+    history.push('/main');
+  }
   return (
     <div>   
       <Grid container direction="column" xs = {12} spacing={2}  mt = {1} alignItems="center" justifyItems="center"> 
         <Grid item xs={2} alignItems="center" justifyItems="center">
           <Item>
           <ThemeProvider theme={theme}>
-              <Button onClick={moveRecipe} >
+              <Button >
                 <Typography variant="h3">
                   在庫確認・登録
                 </Typography>
@@ -82,9 +85,9 @@ const MainPageView: VFC = () => {
         <Grid item xs={2} alignItems="center" justifyItems="center">
           <Item>
             <ThemeProvider theme={theme}>
-              <Button>
+              <Button onClick={moveMain}>
                 <Typography variant="h3">
-                  配達
+                  発注
                 </Typography>
               </Button>
             </ThemeProvider>
@@ -93,7 +96,7 @@ const MainPageView: VFC = () => {
         <Grid item xs={2} alignItems="center" justifyItems="center">
           <Item>
             <ThemeProvider theme={theme}>
-              <Button>
+              <Button onClick={moveRecipe} > 
                 <Typography variant="h3">
                   レシピ絞りこみ
                 </Typography>

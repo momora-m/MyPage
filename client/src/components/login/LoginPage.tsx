@@ -8,7 +8,8 @@ const MainPage: VFC = () => {
     const userInfo:LoginPageApp =
     {
         userId: '1',
-        userName: 'Kaito Mishina'
+        userName: 'Kaito Mishina',
+        password: 'password'
     };
 
     return (

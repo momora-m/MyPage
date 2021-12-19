@@ -37,6 +37,7 @@ const theme = createTheme();
 export type LoginPageApp = {
   userId: string;
   userName: string; 
+  password: string;
 }
 
 type Props = {
@@ -53,7 +54,7 @@ const LoginPageView: VFC<Props> = (props) => {
       email: data.get('email'),
       password: data.get('password'),
     });
-    history.push('/main');
+    history.push('/register');
   };
   const  { userInfo } = props;
   return (
@@ -96,6 +97,7 @@ const LoginPageView: VFC<Props> = (props) => {
               type="password"
               id="password"
               autoComplete="current-password"
+              defaultValue={userInfo.password}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
